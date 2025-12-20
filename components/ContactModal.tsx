@@ -10,7 +10,7 @@ const instruments = [
   { value: 'chitara', label: 'Chitară' },
   { value: 'pian', label: 'Pian' },
   { value: 'canto', label: 'Canto' },
-  { value: 'nedecis', label: 'Nu sunt decidit încă' },
+  { value: 'nedecis', label: 'Nu sunt decis încă' },
 ]
 
 export default function ContactModal() {
