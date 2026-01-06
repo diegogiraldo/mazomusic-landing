@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, MessageCircle, User, Calendar, MapPin, Music } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useModal } from '@/context/ModalContext'
+import { sendConversion } from '@/lib/gtag'
 
 const cities = ['Năvodari', 'Constanța', 'Hârșova', 'Valu lui Traian', 'Cernavodă']
 const instruments = [
@@ -61,6 +62,14 @@ Aștept mai multe informații, mulțumesc!`
 
     const encodedMessage = encodeURIComponent(message)
     const whatsappUrl = `https://wa.me/40770560424?text=${encodedMessage}`
+
+    // Enviar conversión a Google Ads con Enhanced Conversions
+    sendConversion({
+      name: formData.name,
+      city: formData.city,
+      instrument: instrumentLabel,
+      age: formData.age,
+    })
 
     window.open(whatsappUrl, '_blank')
     closeModal()
