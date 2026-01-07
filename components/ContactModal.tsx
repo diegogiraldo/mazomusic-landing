@@ -5,6 +5,7 @@ import { X, MessageCircle, User, Calendar, MapPin, Music } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useModal } from '@/context/ModalContext'
 import { sendConversion } from '@/lib/gtag'
+import { sendFacebookLead } from '@/lib/fbpixel'
 
 const cities = ['Năvodari', 'Constanța', 'Hârșova', 'Valu lui Traian', 'Cernavodă']
 const instruments = [
@@ -65,6 +66,14 @@ Aștept mai multe informații, mulțumesc!`
 
     // Enviar conversión a Google Ads con Enhanced Conversions
     sendConversion({
+      name: formData.name,
+      city: formData.city,
+      instrument: instrumentLabel,
+      age: formData.age,
+    })
+
+    // Enviar evento Lead a Facebook Pixel
+    sendFacebookLead({
       name: formData.name,
       city: formData.city,
       instrument: instrumentLabel,
