@@ -80,14 +80,22 @@ export default function Hero() {
                 key={city.name}
                 type="button"
                 onClick={() => openModal(city.name)}
-                className="w-full flex items-center gap-3 text-left bg-white/5 border border-white/10 rounded-2xl px-4 py-3 active:border-mazo-pink transition-colors"
+                className="relative w-full h-20 flex items-center gap-3 text-left rounded-2xl overflow-hidden px-4 border border-white/10 active:border-mazo-pink active:scale-[0.98] transition-all"
               >
-                <MapPin size={20} className="text-mazo-pink flex-shrink-0" />
-                <span className="flex-1">
-                  <span className="block text-white font-semibold">{city.name}</span>
-                  <span className="block text-white/50 text-xs">Cursuri fizice în centru</span>
+                <Image
+                  src={city.image}
+                  alt={city.name}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/10" />
+                <MapPin size={22} className="relative text-mazo-pink flex-shrink-0" />
+                <span className="relative flex-1">
+                  <span className="block text-white text-lg font-bold leading-tight">{city.name}</span>
+                  <span className="block text-white/70 text-xs">Cursuri fizice în centru</span>
                 </span>
-                <ChevronRight size={18} className="text-white/30" />
+                <ChevronRight size={20} className="relative text-white/70" />
               </button>
             ))}
           </div>
@@ -98,14 +106,14 @@ export default function Hero() {
           <button
             type="button"
             onClick={() => openModal('Online')}
-            className="w-full flex items-center gap-3 text-left bg-white/5 border border-white/10 rounded-2xl px-4 py-3 active:border-mazo-pink transition-colors"
+            className="w-full min-h-20 py-3 flex items-center gap-3 text-left rounded-2xl px-4 bg-gradient-to-r from-mazo-pink to-purple-500 active:scale-[0.98] transition-all"
           >
-            <Laptop size={20} className="text-mazo-pink flex-shrink-0" />
+            <Laptop size={22} className="text-white flex-shrink-0" />
             <span className="flex-1">
-              <span className="block text-white font-semibold">🌐 Online — de oriunde te-ai afla</span>
-              <span className="block text-white/50 text-xs">Învață de acasă, din orice oraș.</span>
+              <span className="block text-white text-lg font-bold leading-tight">🌐 Online — de oriunde te-ai afla</span>
+              <span className="block text-white/80 text-xs">Învață de acasă, din orice oraș.</span>
             </span>
-            <ChevronRight size={18} className="text-white/30" />
+            <ChevronRight size={20} className="text-white/80" />
           </button>
         </motion.div>
 
