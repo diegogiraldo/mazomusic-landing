@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageCircle, Users } from 'lucide-react'
+import { MessageCircle, Users, MapPin, Laptop, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import { useModal } from '@/context/ModalContext'
 
@@ -22,14 +22,14 @@ const cities = [
     image: '/images/gallery/600955359_1436648481800275_3080660869012872171_n.jpg',
   },
   {
-    name: 'Valu lui Traian',
-    description: 'Cursuri disponibile',
-    image: '/images/gallery/598150351_18433768165104126_3451718325131525554_n.jpg',
-  },
-  {
     name: 'Cernavodă',
     description: 'Cursuri disponibile',
     image: '/images/gallery/601476107_1440168341448289_3844633712055369762_n.jpg',
+  },
+  {
+    name: 'Valu lui Traian',
+    description: 'Cursuri disponibile',
+    image: '/images/gallery/598150351_18433768165104126_3451718325131525554_n.jpg',
   },
 ]
 
@@ -61,17 +61,65 @@ export default function Hero() {
           </div>
         </motion.div>
 
+        {/* Location list (mobile) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="md:hidden bg-white/5 border border-white/10 rounded-3xl p-5"
+        >
+          <h2 className="text-xl font-bold text-white mb-1">📍 Alege unde vrei să înveți</h2>
+          <p className="text-white/60 text-sm mb-4">
+            Alege centrul MAZO MUSIC unde vrei să participi la cursuri sau învață online, de oriunde te-ai afla.
+          </p>
+
+          <h3 className="text-white font-semibold mb-2">Centre MAZO MUSIC</h3>
+          <div className="space-y-2">
+            {cities.map((city) => (
+              <button
+                key={city.name}
+                type="button"
+                onClick={() => openModal(city.name)}
+                className="w-full flex items-center gap-3 text-left bg-white/5 border border-white/10 rounded-2xl px-4 py-3 active:border-mazo-pink transition-colors"
+              >
+                <MapPin size={20} className="text-mazo-pink flex-shrink-0" />
+                <span className="flex-1">
+                  <span className="block text-white font-semibold">{city.name}</span>
+                  <span className="block text-white/50 text-xs">Cursuri fizice în centru</span>
+                </span>
+                <ChevronRight size={18} className="text-white/30" />
+              </button>
+            ))}
+          </div>
+
+          <div className="border-t border-white/10 my-4" />
+
+          <h3 className="text-white font-semibold mb-2">Sau alege varianta online</h3>
+          <button
+            type="button"
+            onClick={() => openModal('Online')}
+            className="w-full flex items-center gap-3 text-left bg-white/5 border border-white/10 rounded-2xl px-4 py-3 active:border-mazo-pink transition-colors"
+          >
+            <Laptop size={20} className="text-mazo-pink flex-shrink-0" />
+            <span className="flex-1">
+              <span className="block text-white font-semibold">🌐 Online — de oriunde te-ai afla</span>
+              <span className="block text-white/50 text-xs">Învață de acasă, din orice oraș.</span>
+            </span>
+            <ChevronRight size={18} className="text-white/30" />
+          </button>
+        </motion.div>
+
         {/* City Posters */}
-        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-5 md:overflow-visible">
+        <div className="hidden md:grid md:grid-cols-5 gap-4">
           {cities.map((city, index) => (
             <motion.div
               key={city.name}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex-shrink-0 w-[280px] md:w-auto snap-center group"
+              className="relative group"
             >
-              <div className="relative h-[420px] md:h-[500px] rounded-3xl overflow-hidden">
+              <div className="relative h-[500px] rounded-3xl overflow-hidden">
                 {/* Background Image */}
                 <Image
                   src={city.image}
@@ -113,10 +161,17 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Scroll hint on mobile */}
-        <div className="md:hidden text-center mt-4">
-          <span className="text-white/40 text-sm">← Scroll pentru mai multe locații →</span>
-        </div>
+        {/* Online option (desktop) */}
+        <button
+          type="button"
+          onClick={() => openModal('Online')}
+          className="hidden md:flex items-center gap-4 mx-auto mt-6 bg-white/5 border border-white/10 rounded-full px-6 py-3 text-left hover:border-mazo-pink transition-colors"
+        >
+          <Laptop size={20} className="text-mazo-pink" />
+          <span className="text-white font-semibold">🌐 Sau învață online — de oriunde te-ai afla</span>
+          <span className="text-white/50 text-sm">Învață de acasă, din orice oraș.</span>
+          <ChevronRight size={18} className="text-white/40" />
+        </button>
       </div>
     </section>
   )

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useModal } from '@/context/ModalContext'
 
 const images = [
   '/images/gallery/585110917_18431388901104126_4069223916877865583_n.jpg',
@@ -22,6 +23,8 @@ const images = [
 ]
 
 export default function Gallery() {
+  const { openModal } = useModal()
+
   return (
     <section className="bg-black py-20 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
@@ -53,7 +56,12 @@ export default function Gallery() {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="break-inside-avoid group relative overflow-hidden rounded-2xl"
             >
-              <div className="relative aspect-[3/4]">
+              <button
+                type="button"
+                onClick={() => openModal()}
+                aria-label="Înscrie-te"
+                className="relative block w-full aspect-[3/4] cursor-pointer"
+              >
                 <Image
                   src={src}
                   alt={`Mazo Music Academy - Foto ${index + 1}`}
@@ -63,7 +71,7 @@ export default function Gallery() {
                 />
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+              </button>
             </motion.div>
           ))}
         </div>
