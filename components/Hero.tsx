@@ -7,14 +7,14 @@ import { useModal } from '@/context/ModalContext'
 
 const cities = [
   {
-    name: 'Năvodari',
-    description: 'Sediul principal',
-    image: '/images/gallery/588702727_18432102331104126_2059678183996744615_n.jpg',
-  },
-  {
     name: 'Constanța',
     description: 'Cursuri disponibile',
     image: '/images/gallery/589243578_18433765369104126_4660939626528537681_n.jpg',
+  },
+  {
+    name: 'Năvodari',
+    description: 'Sediul principal',
+    image: '/images/gallery/588702727_18432102331104126_2059678183996744615_n.jpg',
   },
   {
     name: 'Hârșova',

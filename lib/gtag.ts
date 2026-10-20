@@ -48,7 +48,7 @@ export const sendConversion = (userData: {
     user_data: {
       // Datos del formulario disponibles
       address: {
-        city: userData.city,
+        ...(userData.city !== 'Online' && { city: userData.city }),
         country: 'RO',
       },
     },
