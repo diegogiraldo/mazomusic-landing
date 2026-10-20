@@ -1,14 +1,13 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, MessageCircle, User, Calendar, MapPin, Music, Laptop } from 'lucide-react'
+import { X, MessageCircle, User, Calendar, MapPin, Music } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useModal } from '@/context/ModalContext'
 import { sendConversion } from '@/lib/gtag'
 import { sendFacebookLead } from '@/lib/fbpixel'
 
 const cities = ['Constanța', 'Năvodari', 'Hârșova', 'Cernavodă', 'Valu lui Traian']
-const ONLINE = 'Online'
 const instruments = [
   { value: 'chitara', label: 'Chitară' },
   { value: 'pian', label: 'Pian' },
@@ -176,48 +175,23 @@ Aștept mai multe informații, mulțumesc!`
                     />
                   </div>
 
-                  {/* Location */}
+                  {/* City */}
                   <div>
-                    <label className="block text-white/80 text-sm font-medium mb-1">
+                    <label className="block text-white/80 text-sm font-medium mb-2">
                       <MapPin size={14} className="inline mr-2" />
-                      Alege unde vrei să înveți
+                      Orașul
                     </label>
-                    <p className="text-white/50 text-xs mb-3">
-                      Alege centrul MAZO MUSIC unde vrei să participi la cursuri sau învață online, de oriunde te-ai afla.
-                    </p>
-
-                    <p className="text-white/70 text-xs font-medium uppercase tracking-wider mb-2">Centre MAZO MUSIC</p>
-                    <div className="space-y-2">
-                      {cities.map(city => (
-                        <button
-                          key={city}
-                          type="button"
-                          onClick={() => handleChange('city', city)}
-                          className={`w-full flex items-center gap-3 text-left bg-white/5 border ${formData.city === city ? 'border-mazo-pink bg-mazo-pink/10' : errors.city ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-2.5 transition-colors hover:border-mazo-pink/60`}
-                        >
-                          <MapPin size={18} className={formData.city === city ? 'text-mazo-pink' : 'text-white/60'} />
-                          <span>
-                            <span className="block text-white font-semibold">{city}</span>
-                            <span className="block text-white/50 text-xs">Cursuri fizice în centru</span>
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="border-t border-white/10 my-4" />
-
-                    <p className="text-white/70 text-xs font-medium uppercase tracking-wider mb-2">Sau alege varianta online</p>
-                    <button
-                      type="button"
-                      onClick={() => handleChange('city', ONLINE)}
-                      className={`w-full flex items-center gap-3 text-left bg-white/5 border ${formData.city === ONLINE ? 'border-mazo-pink bg-mazo-pink/10' : errors.city ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-2.5 transition-colors hover:border-mazo-pink/60`}
+                    <select
+                      value={formData.city}
+                      onChange={(e) => handleChange('city', e.target.value)}
+                      className={`w-full bg-white/5 border ${errors.city ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-white focus:outline-none focus:border-mazo-pink transition-colors appearance-none cursor-pointer`}
                     >
-                      <Laptop size={18} className={formData.city === ONLINE ? 'text-mazo-pink' : 'text-white/60'} />
-                      <span>
-                        <span className="block text-white font-semibold">🌐 Online — de oriunde te-ai afla</span>
-                        <span className="block text-white/50 text-xs">Învață de acasă, din orice oraș.</span>
-                      </span>
-                    </button>
+                      <option value="" className="bg-zinc-900">Selectează orașul</option>
+                      {cities.map(city => (
+                        <option key={city} value={city} className="bg-zinc-900">{city}</option>
+                      ))}
+                      <option value="Online" className="bg-zinc-900">🌐 Online — de oriunde te-ai afla</option>
+                    </select>
                   </div>
 
                   {/* Instrument */}
